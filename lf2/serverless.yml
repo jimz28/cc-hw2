@@ -1,0 +1,22 @@
+service: test3 # NOTE: update this with your service name
+
+
+provider:
+  name: aws
+  runtime: python3.7
+
+
+functions:
+  test3:
+    handler: handler.test3
+    events:
+      - sqs:
+          arn: "arn:aws:sqs:us-east-1:925930642762:dining_q2"
+          batchSize: 1
+
+plugins:
+  - serverless-python-requirements
+
+custom:
+  pythonRequirements:
+    dockerizePip: non-linux
